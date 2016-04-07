@@ -15,7 +15,7 @@ const expected = [
   { requested: 'pkg-extra',      from: joinCwd('index.js'), resolved: null },
 ];
 
-test('should esDepsResolved', t => esDepsResolved('./fixtures')
+test('basic', t => esDepsResolved('./fixtures')
   .then(_ => {
     t.deepEqual(_[0], expected[0]);
     t.deepEqual(_[1], expected[1]);
@@ -24,6 +24,9 @@ test('should esDepsResolved', t => esDepsResolved('./fixtures')
     t.deepEqual(_[4], expected[4]);
     t.deepEqual(_[5], expected[5]);
   }));
+
+test('unresolvable', t => esDepsResolved('./fixtures-extra')
+  .then(_ => t.is(_, null)));
 
 test('empty input', t => t.throws(esDepsResolved(), TypeError));
 test('invalid input', t => t.throws(esDepsResolved(2), TypeError));

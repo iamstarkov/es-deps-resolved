@@ -36,8 +36,10 @@ function esDepsResolved(filename) {
   return R.pipeP(resolve,
     contract('filename', String),
     resolveCwd,
-    esDeps,
-    R.map(depToResolved(filename))
+    R.unless(R.isNil, R.pipeP(resolve,
+      esDeps,
+      R.map(depToResolved(filename))
+    ))
   )(filename);
 }
 
