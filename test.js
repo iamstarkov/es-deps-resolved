@@ -1,8 +1,7 @@
 /* eslint-disable no-multi-spaces, max-len */
 import test from 'ava';
-import esDepsResolved from '../index';
+import esDepsResolved from './index';
 import { join } from 'path';
-// import { deepEqual } from 'assert';
 
 const { cwd } = process;
 const joinCwd = filename => join(cwd(), 'fixtures', filename);
@@ -24,7 +23,6 @@ test('should esDepsResolved', t => esDepsResolved('./fixtures')
     t.deepEqual(_[3], expected[3]);
     t.deepEqual(_[4], expected[4]);
     t.deepEqual(_[5], expected[5]);
-    // t.deepEqual(_, expected);
   }));
 
 test('empty input', t => t.throws(esDepsResolved(), TypeError));
