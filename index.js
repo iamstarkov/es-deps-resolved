@@ -1,3 +1,3 @@
 export default function esDepsResolved(input) {
-  return input;
+  return Promise.resolve(input);
 }
