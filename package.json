@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "description": "ECMAScript 2015+/CommonJS module dependencies resolved array",
   "main": "index.es5.js",
+  "jsnext:main": "index.js",
   "files": [
+    "index.js",
     "index.es5.js"
   ],
   "scripts": {
