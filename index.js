@@ -1,20 +1,12 @@
 import R from 'ramda';
 import esDeps from 'es-deps';
-import p from 'path';
+import { dirname } from 'path';
 import binded from 'binded';
 import Promise from 'pinkie-promise';
 import resolveCwd from 'resolve-cwd';
-import _resolveFrom from 'resolve-from';
+import resolveFrom from 'resolve-from';
 
 const { resolve, reject } = binded(Promise);
-
-const { log: _log } = binded(console);
-const log = R.tap(_log);
-
-const resolveFrom = R.curry(_resolveFrom);
-
-// const
-const id = R.identity;
 
 // contract :: String -> Constructor -> a -> a | Promise.reject TypeError
 const contract = R.curry((name, ctor, param) => R.unless(
@@ -24,19 +16,23 @@ const contract = R.curry((name, ctor, param) => R.unless(
   )
 )(param));
 
+// relativeToRoot :: String -> (Function -> String -> String)
+const relativeTo = R.pipe(resolveCwd, dirname, R.curry(resolveFrom));
+
+// depToResolved :: String -> String -> Object
+const depToResolved = R.curry((root, dep) => R.pipe(
+  R.of,
+  R.ap([R.identity, relativeTo(root)]),
+  R.zipObj(['requested', 'resolved']),
+  R.assoc('from', resolveCwd(root))
+)(dep));
+
 function esDepsResolved(filename) {
   return R.pipeP(resolve,
     contract('filename', String),
     resolveCwd,
     esDeps,
-    R.map(R.pipe(
-      R.of,
-      // R.ap([id, resolveFrom(p.dirname(resolveCwd(filename)))]),
-      R.zipObj(['requested', 'resolved']),
-      // R.assoc('from', resolveCwd(filename)),
-      id
-    )),
-    id
+    R.map(depToResolved(filename))
   )(filename);
 }
 

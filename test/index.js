@@ -27,5 +27,5 @@ test('should esDepsResolved', t => esDepsResolved('./fixtures')
     // t.deepEqual(_, expected);
   }));
 
-test.only('empty input', t => t.throws(esDepsResolved(), TypeError));
-test.only('invalid input', t => t.throws(esDepsResolved(2), TypeError));
+test('empty input', t => t.throws(esDepsResolved(), TypeError));
+test('invalid input', t => t.throws(esDepsResolved(2), TypeError));
