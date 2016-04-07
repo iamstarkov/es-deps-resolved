@@ -17,6 +17,8 @@ const expected = [
   { requested: 'pkg-extra',      resolved: null },
 ].map(assocFromJoinCwd);
 
+console.log(expected);
+
 test('should esDepsResolved', t => esDepsResolved('./fixtures')
   .then(_ => t.same(_, expected)));
 

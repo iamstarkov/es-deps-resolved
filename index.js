@@ -25,9 +25,9 @@ function esDepsResolved(filename) {
       R.ap([id, resolveFrom(p.dirname(resolveCwd(filename)))]),
       R.zipObj(['requested', 'resolved']),
       R.merge({ from: resolveCwd(filename) }),
-      log,
       id
     )),
+    log,
     id
   )(filename);
 }
