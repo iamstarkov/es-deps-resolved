@@ -16,28 +16,46 @@
 ```js
 import esDepsResolved from 'es-deps-resolved';
 
-esDepsResolved('unicorns'); // unicorns
+esDepsResolved('./fixtures')
+  .then(result => console.log(result)); /* [
+    { requested: './local', resolved: '/Users/iamstarkov/projects/es-deps-resolved/fixtures/local.js'
+      from: '/Users/iamstarkov/projects/es-deps-resolved/fixtures/index.js' },
+    { requested: './local-extra', resolved: null,
+      from: '/Users/iamstarkov/projects/es-deps-resolved/fixtures/index.js' },
+    { requested: './folder', resolved: '/Users/iamstarkov/projects/es-deps-resolved/fixtures/folder/index.js',
+      from: '/Users/iamstarkov/projects/es-deps-resolved/fixtures/index.js' },
+    { requested: './folder-extra', resolved: null,
+      from: '/Users/iamstarkov/projects/es-deps-resolved/fixtures/index.js' },
+    { requested: 'pkg', resolved: '/Users/iamstarkov/projects/es-deps-resolved/fixtures/node_modules/pkg/index.js',
+      from: '/Users/iamstarkov/projects/es-deps-resolved/fixtures/index.js' },
+    { requested: 'pkg-extra', resolved: null,
+      from: '/Users/iamstarkov/projects/es-deps-resolved/fixtures/index.js' } ] */
+
+esDepsResolved('./fixtures-unexistent')
+  .then(result => console.log(result)); // null
 ```
 
 ## API
 
-### esDepsResolved(input, [options])
+### esDepsResolved(filename)
 
-#### input
+If filename is resolvable, then it returns Promise which resolved to:
+```js
+Array[Object {
+  requested: String,
+  from: String,
+  resolved: String | null
+}]
+```
+
+Otherwise returns Promise, which resolved to `null`.
+
+#### filename
 
 *Required*  
 Type: `String`
 
-Lorem ipsum.
-
-#### options
-
-##### foo
-
-Type: `Boolean`  
-Default: `false`
-
-Lorem ipsum.
+Relative path.
 
 ## License
 
