@@ -16,6 +16,17 @@
 ```js
 import esDepsResolved from 'es-deps-resolved';
 
+/* fixtures/index.js
+import fileResolved from './local';
+import fileUnresolved from './local-extra';
+
+import folderResolved from './folder';
+import folderUnresolved from './folder-extra';
+
+import pkgResolved from 'pkg';
+import pkgUnresolved from 'pkg-extra';
+*/
+
 esDepsResolved('./fixtures')
   .then(result => console.log(result)); /* [
     { requested: './local', resolved: '/Users/iamstarkov/projects/es-deps-resolved/fixtures/local.js'
