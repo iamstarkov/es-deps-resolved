@@ -8,12 +8,12 @@ import resolveFrom from 'resolve-from';
 
 const { resolve, reject } = binded(Promise);
 
+// errorText :: String -> Constructor -> a -> String
 const errorText = (name, ctor, param) => {
   const expected = R.type(ctor());
   const got = R.type(param);
   return `\`${name}\` should be \`${expected}\`, but got \`${got}\``;
 };
-
 
 // contract :: String -> Constructor -> a -> a | Promise.reject TypeError
 const contract = R.curry((name, ctor, param) => R.unless(
