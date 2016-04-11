@@ -62,7 +62,7 @@
     "binded": "^1.0.1",
     "es-deps": "^1.0.0",
     "pinkie-promise": "^2.0.0",
-    "ramda": "^0.20.1",
+    "ramda": "^0.21.0",
     "resolve-cwd": "^1.0.0",
     "resolve-from": "^2.0.0"
   }
