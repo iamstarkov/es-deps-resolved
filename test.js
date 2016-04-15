@@ -25,8 +25,6 @@ test('basic', t => esDepsResolved('./fixtures')
     t.deepEqual(_[5], expected[5]);
   }));
 
-test('unresolvable', t => esDepsResolved('./fixtures-extra')
-  .then(_ => t.is(_, null)));
-
+test('unresolvable', t => t.throws(esDepsResolved('./fixtures-extra'), Error));
 test('empty input', t => t.throws(esDepsResolved(), TypeError));
 test('invalid input', t => t.throws(esDepsResolved(2), TypeError));
