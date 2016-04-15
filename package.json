@@ -1,6 +1,6 @@
 {
   "name": "es-deps-resolved",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "ECMAScript 2015+/CommonJS module dependencies resolved array",
   "main": "index.es5.js",
   "jsnext:main": "index.js",
