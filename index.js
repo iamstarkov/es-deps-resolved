@@ -1,17 +1,12 @@
 import R from 'ramda';
 import esDeps from 'es-deps';
-import path from 'path';
+import { dirname } from 'path';
 import binded from 'binded';
 import Promise from 'pinkie-promise';
 import resolveCwd from 'resolve-cwd';
 import resolveFrom from 'resolve-from';
 
-const join = R.curryN(2, path.join);
-
-const { cwd } = process;
 const { resolve, reject } = binded(Promise);
-
-const reqResolve = require.resolve;
 
 // errorText :: String -> Constructor -> a -> String
 const errorText = (name, ctor, param) => {
@@ -26,7 +21,7 @@ const contract = R.curry((name, ctor, param) => R.unless(
 )(param));
 
 // relativeToRoot :: String -> (Function -> String -> String)
-const relativeTo = R.pipe(resolveCwd, path.dirname, R.curry(resolveFrom));
+const relativeTo = R.pipe(resolveCwd, dirname, R.curry(resolveFrom));
 
 // depToResolved :: String -> String -> Object
 const depToResolved = R.curry((root, dep) => R.pipe(
@@ -40,10 +35,11 @@ const depToResolved = R.curry((root, dep) => R.pipe(
 function esDepsResolved(filename) {
   return R.pipeP(resolve,
     contract('filename', String),
-    join(cwd()),
-    reqResolve,
-    esDeps,
-    R.map(depToResolved(filename))
+    resolveCwd,
+    R.unless(R.isNil, R.pipeP(resolve,
+      esDeps,
+      R.map(depToResolved(filename))
+    ))
   )(filename);
 }
 
