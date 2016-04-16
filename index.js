@@ -32,15 +32,14 @@ const depToResolved = R.curry((root, dep) => R.pipe(
 )(dep));
 
 // esDepsResolved :: String -> Array[Object]
-function esDepsResolved(filename) {
+function esDepsResolved(file) {
   return R.pipeP(resolve,
-    contract('filename', String),
+    contract('file', String),
     resolveCwd,
-    R.unless(R.isNil, R.pipeP(resolve,
-      esDeps,
-      R.map(depToResolved(filename))
-    ))
-  )(filename);
+    R.when(R.isNil, () => reject(new Error(`Can't find and open \`${file}\``))),
+    esDeps,
+    R.map(depToResolved(file))
+  )(file);
 }
 
 export default esDepsResolved;

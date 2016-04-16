@@ -43,25 +43,23 @@ esDepsResolved('./fixtures')
       from: '/Users/iamstarkov/projects/es-deps-resolved/fixtures/index.js' } ] */
 
 esDepsResolved('./fixtures-unexistent')
-  .then(result => console.log(result)); // null
+  .catch(reason => console.error(reason)); // new Error("Can't find and open `./fixtures-unexistent`")
 ```
 
 ## API
 
-### esDepsResolved(filename)
+### esDepsResolved(file)
 
-If filename is resolvable, then it returns Promise which resolved to:
+Returns Promise which resolved to:
 ```js
 Array[Object {
   requested: String,
   from: String,
-  resolved: String | null
+  resolved: String | null /* `null` if dependency is not resolvable */
 }]
 ```
 
-Otherwise returns Promise, which resolved to `null`.
-
-#### filename
+#### file
 
 *Required*  
 Type: `String`
