@@ -66,6 +66,16 @@ Type: `String`
 
 Relative path.
 
+## Related
+
+* [es-deps][es-deps] — ECMAScript 2015+/CommonJS module dependencies array
+* [es-deps-from-string][es-deps-from-string] — ECMAScript 2015+/CommonJS module dependencies array from string
+* [es-dep-unit][es-dep-unit] — Constructor for ECMAScript 2015+/CommonJS dependency unit `Object { requested, from, resolved }`
+
+[es-deps]: https://github.com/iamstarkov/es-deps
+[es-deps-from-string]: https://github.com/iamstarkov/es-deps-from-string
+[es-dep-unit]: https://github.com/iamstarkov/es-dep-unit
+
 ## License
 
 MIT © [Vladimir Starkov](https://iamstarkov.com)
