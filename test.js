@@ -1,18 +1,18 @@
-/* eslint-disable no-multi-spaces, max-len */
+/* eslint-disable no-multi-spaces, no-underscore-dangle */
 import test from 'ava';
+import R from 'ramda';
 import esDepsResolved from './index';
-import { join } from 'path';
+import { esDepUnitMock } from 'es-dep-unit';
 
-const { cwd } = process;
-const joinCwd = filename => join(cwd(), 'fixtures', filename);
+const fixtureEntryDep = esDepUnitMock(['fixtures'], R.__, 'index.js', R.__);
 
 const expected = [
-  { requested: './local',        from: joinCwd('index.js'), resolved: joinCwd('local.js') },
-  { requested: './local-extra',  from: joinCwd('index.js'), resolved: null },
-  { requested: './folder',       from: joinCwd('index.js'), resolved: joinCwd('folder/index.js') },
-  { requested: './folder-extra', from: joinCwd('index.js'), resolved: null },
-  { requested: 'pkg',            from: joinCwd('index.js'), resolved: joinCwd('node_modules/pkg/index.js') },
-  { requested: 'pkg-extra',      from: joinCwd('index.js'), resolved: null },
+  fixtureEntryDep('./local',        'local.js'),
+  fixtureEntryDep('./local-extra',  null),
+  fixtureEntryDep('./folder',       'folder/index.js'),
+  fixtureEntryDep('./folder-extra', null),
+  fixtureEntryDep('pkg',            'node_modules/pkg/index.js'),
+  fixtureEntryDep('pkg-extra',      null),
 ];
 
 test('basic', async t => {

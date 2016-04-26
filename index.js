@@ -6,6 +6,7 @@ import Promise from 'pinkie-promise';
 import resolveCwd from 'resolve-cwd';
 import resolveFrom from 'resolve-from';
 import contract from 'neat-contract';
+import { esDepUnit } from 'es-dep-unit';
 
 const { resolve, reject } = binded(Promise);
 
@@ -15,9 +16,8 @@ const relativeTo = R.pipe(resolveCwd, dirname, R.curry(resolveFrom));
 // depToResolved :: String -> String -> Object
 const depToResolved = R.curry((root, dep) => R.pipe(
   R.of,
-  R.ap([R.identity, relativeTo(root)]),
-  R.zipObj(['requested', 'resolved']),
-  R.assoc('from', resolveCwd(root))
+  R.ap([R.identity, R.always(resolveCwd(root)), relativeTo(root)]),
+  R.apply(esDepUnit)
 )(dep));
 
 // esDepsResolved :: String -> Array[Object]
