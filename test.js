@@ -15,15 +15,16 @@ const expected = [
   { requested: 'pkg-extra',      from: joinCwd('index.js'), resolved: null },
 ];
 
-test('basic', t => esDepsResolved('./fixtures')
-  .then(_ => {
-    t.deepEqual(_[0], expected[0]);
-    t.deepEqual(_[1], expected[1]);
-    t.deepEqual(_[2], expected[2]);
-    t.deepEqual(_[3], expected[3]);
-    t.deepEqual(_[4], expected[4]);
-    t.deepEqual(_[5], expected[5]);
-  }));
+test('basic', async t => {
+  const result = await esDepsResolved('./fixtures');
+
+  t.deepEqual(result[0], expected[0]);
+  t.deepEqual(result[1], expected[1]);
+  t.deepEqual(result[2], expected[2]);
+  t.deepEqual(result[3], expected[3]);
+  t.deepEqual(result[4], expected[4]);
+  t.deepEqual(result[5], expected[5]);
+});
 
 test('unresolvable', t => t.throws(esDepsResolved('./fixtures-extra'), Error));
 test('empty input', t => t.throws(esDepsResolved(), TypeError));
