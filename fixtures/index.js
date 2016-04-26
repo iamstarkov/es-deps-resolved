@@ -6,3 +6,5 @@ import folderUnresolved from './folder-extra';
 
 import pkgResolved from 'pkg';
 import pkgUnresolved from 'pkg-extra';
+
+import path from 'path';
