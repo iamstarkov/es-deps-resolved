@@ -71,10 +71,14 @@ Relative path.
 * [es-deps][es-deps] — ECMAScript 2015+/CommonJS module dependencies array
 * [es-deps-from-string][es-deps-from-string] — ECMAScript 2015+/CommonJS module dependencies array from string
 * [es-dep-unit][es-dep-unit] — Constructor for ECMAScript 2015+/CommonJS dependency unit `Object { requested, from, resolved }`
+* [es-deps-deep][es-deps-deep] — ECMAScript 2015+/CommonJS module dependencies resolved in depth
+* [es-dep-kit][es-dep-kit] — ECMAScript 2015+/CommonJS module dependencies helpers kit
 
 [es-deps]: https://github.com/iamstarkov/es-deps
 [es-deps-from-string]: https://github.com/iamstarkov/es-deps-from-string
 [es-dep-unit]: https://github.com/iamstarkov/es-dep-unit
+[es-deps-deep]: https://github.com/iamstarkov/es-deps-deep
+[es-dep-kit]: https://github.com/iamstarkov/es-dep-kit
 
 ## License
 
