@@ -2,9 +2,9 @@
 import test from 'ava';
 import R from 'ramda';
 import esDepsResolved from './index';
-import { esDepUnitMock } from 'es-dep-unit';
+import { mock as depMock } from 'es-dep-unit';
 
-const fixtureEntryDep = esDepUnitMock(['fixtures'], R.__, 'index.js', R.__);
+const fixtureEntryDep = depMock(['fixtures'], R.__, 'index.js', R.__);
 
 const expected = [
   fixtureEntryDep('./local',        'local.js'),
