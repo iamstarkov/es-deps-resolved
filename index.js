@@ -25,7 +25,7 @@ function esDepsResolved(file) {
   return R.pipeP(toPromise,
     contract('file', String),
     resolveCwd,
-    R.tap(contract('file', String)),
+    R.when(R.isNil, () => { throw new Error(`Can't resolve file \`${file}\` `); }),
     esDeps,
     R.map(depToResolved(file))
   )(file);
