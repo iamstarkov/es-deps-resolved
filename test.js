@@ -5,7 +5,7 @@ import esDepsResolved from './index';
 import { mock as depMock } from 'es-dep-unit';
 import { join } from 'path';
 
-const fixtureEntryDep = depMock(['fixtures'], R.__, 'index.js', R.__);
+const fixtureEntryDep = depMock(join(__dirname, 'fixtures'), R.__, 'index.js', R.__);
 
 test('basic', async t => {
   const actual = await esDepsResolved(join(__dirname, './fixtures/index.js'));
