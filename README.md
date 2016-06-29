@@ -14,6 +14,7 @@
 ## Usage
 
 ```js
+import path from 'path';
 import esDepsResolved from 'es-deps-resolved';
 
 /* fixtures/index.js
@@ -27,7 +28,7 @@ import pkgResolved from 'pkg';
 import pkgUnresolved from 'pkg-extra';
 */
 
-esDepsResolved('./fixtures')
+esDepsResolved(path.join(__dirname, './fixtures'))
   .then(result => console.log(result)); /* [
     { requested: './local', resolved: '/Users/iamstarkov/projects/es-deps-resolved/fixtures/local.js'
       from: '/Users/iamstarkov/projects/es-deps-resolved/fixtures/index.js' },
@@ -42,7 +43,7 @@ esDepsResolved('./fixtures')
     { requested: 'pkg-extra', resolved: null,
       from: '/Users/iamstarkov/projects/es-deps-resolved/fixtures/index.js' } ] */
 
-esDepsResolved('./fixtures-unexistent')
+esDepsResolved(path.join(__dirname, './fixtures-unexistent'))
   .catch(reason => console.error(reason)); // new Error("Can't find and open `./fixtures-unexistent`")
 ```
 
@@ -50,7 +51,7 @@ esDepsResolved('./fixtures-unexistent')
 
 ### esDepsResolved(file)
 
-Returns Promise which resolved to:
+Returns Promise which resolved to `Array[Object]`:
 ```js
 Array[Object {
   requested: String,
@@ -64,7 +65,7 @@ Array[Object {
 *Required*  
 Type: `String`
 
-Relative path.
+Absolute path.
 
 ## Related
 
