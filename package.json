@@ -62,7 +62,7 @@
   },
   "dependencies": {
     "es-dep-unit": "^2.0.0",
-    "es-deps": "^1.0.0",
+    "es-deps": "^1.0.3",
     "neat-contract": "^1.0.0",
     "pinkie-promise": "^2.0.0",
     "ramda": "^0.21.0",
